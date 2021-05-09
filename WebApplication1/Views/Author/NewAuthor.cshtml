@@ -1,0 +1,29 @@
+﻿@model WebApplication1.Models.AuthorModel
+
+@{
+    ViewData["Title"] = "NewAuthor";
+    Layout = "~/Pages/_LayoutAdmin.cshtml";
+}
+
+<h1>New Author</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NewAuthor" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Lastname</label>
+                <input asp-for="LastName" class="form-control" name="LastName"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">Firstname</label>
+                <input asp-for="FirstName" class="form-control" name="FirstName"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

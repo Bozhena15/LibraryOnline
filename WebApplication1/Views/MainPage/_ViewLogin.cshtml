@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Pages/_Layout.cshtml";
+}
+
+<h1>Are you admin or user?</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form >
+            <div>
+                @Html.ActionLink("Admin","LoginAdmin","Admin")
+            </div>
+            <div>
+                @Html.ActionLink("User", "Login", "Account")
+            </div>
+        </form>
+    </div>
+</div>
