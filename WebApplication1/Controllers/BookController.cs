@@ -20,9 +20,10 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public IActionResult NewBook()
         {
-            ViewBag.Genre = new SelectList(context.GenreBooks.ToList(), "Id", "Genre");
+            ViewBag.GenreBook = new SelectList(context.GenreBooks.ToList(), "Id", "Genre");
             ViewBag.AuthorL = new SelectList(context.Authors.ToList(), "Id", "LastName");
             ViewBag.AuthorF = new SelectList(context.Authors.ToList(), "Id", "FirstName");
+
             return View();
         }
         [Authorize]
@@ -31,13 +32,16 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid && Check.CheckBook(model))
             {
-                string genre1 = ViewBag.Genre;
-                GenreBookModel genre = context.GenreBooks.FirstOrDefault(g => g.Genre == genre1);
-                model.GenreBook = genre;
+                int genreId = Convert.ToInt32(Request.Form.FirstOrDefault(g => g.Key == "GenreBook").Value);
+                GenreBookModel genre = context.GenreBooks.FirstOrDefault(g => g.Id == genreId);
+
+                int authorId = Convert.ToInt32(Request.Form.FirstOrDefault(l => l.Key == "AuthorL").Value);
+                AuthorModel author = context.Authors.FirstOrDefault(a => a.Id == authorId);
+
                 BookModel book = context.Books.FirstOrDefault(b => b.Name == model.Name);
                 if (book == null)
                 {
-                    context.Books.Add(new BookModel { Name = model.Name, Link = model.Link, YearOfPublic = model.YearOfPublic, GenreBook = model.GenreBook, Author = model.Author });
+                    context.Books.Add(new BookModel { Name = model.Name, Link = model.Link, YearOfPublic = model.YearOfPublic, GenreBook = genre, Author = author });
                     context.SaveChanges();
                     return RedirectToAction("_ViewStartAdmin", "MainPage");
                 }
@@ -53,7 +57,9 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("AllBook", "Home");
 
             ViewBag.Id = id;
-
+            ViewBag.GenreBook = new SelectList(context.GenreBooks.ToList(), "Id", "Genre");
+            ViewBag.AuthorL = new SelectList(context.Authors.ToList(), "Id", "LastName");
+            ViewBag.AuthorF = new SelectList(context.Authors.ToList(), "Id", "FirstName");
             BookModel book = context.Books.Where(a => a.Id == id).First();
 
             return View(book);
@@ -62,6 +68,15 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult EditBook(BookModel book)
         {
+            int genreId = Convert.ToInt32(Request.Form.FirstOrDefault(g => g.Key == "GenreBook").Value);
+            GenreBookModel genre = context.GenreBooks.FirstOrDefault(g => g.Id == genreId);
+
+            int authorId = Convert.ToInt32(Request.Form.FirstOrDefault(l => l.Key == "AuthorL").Value);
+            AuthorModel author = context.Authors.FirstOrDefault(a => a.Id == authorId);
+
+            book.GenreBook = genre;
+            book.Author = author;
+
             context.Books.Update(book);
             context.SaveChanges();
             return RedirectToAction("AllBook", "Home");
