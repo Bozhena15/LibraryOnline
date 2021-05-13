@@ -98,5 +98,24 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("AllBook", "Home");
         }
+        [Authorize]
+        [HttpGet]
+        public IActionResult AddUserBook(int? id)//user 
+        {
+            if(id == null)
+                return RedirectToAction("AllBooks", "Home");
+
+            string email = this.User.Identity.Name;
+            UserModel user = context.Users.Where(u => u.Email == email).FirstOrDefault();
+            BookModel book = context.Books.Where(b => b.Id == id).FirstOrDefault();
+
+            user.Books.Add(book);
+
+            context.Users.Update(user);
+            context.SaveChanges();
+
+            return RedirectToAction("AllBooks", "Home");
+        }
+        
     }
 }

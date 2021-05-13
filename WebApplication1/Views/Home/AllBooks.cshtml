@@ -22,9 +22,6 @@
                 @Html.DisplayNameFor(model => model.YearOfPublic)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Link)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th></th>
@@ -46,14 +43,14 @@
                 @Html.DisplayFor(modelItem => item.YearOfPublic)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
 
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Add</a>
+                <a asp-controller="Book" asp-action="AddUserBook" asp-route-id="@item.Id">Add</a>
+            </td>
+            <td>
+                <a href="@Html.DisplayFor(modelItem => item.Link)">Add</a>
             </td>
         </tr>
 }
