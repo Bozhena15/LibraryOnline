@@ -104,18 +104,43 @@ namespace WebApplication1.Controllers
         {
             if(id == null)
                 return RedirectToAction("AllBooks", "Home");
+            try
+            {
+                string email = this.User.Identity.Name;
+                UserModel user = context.Users.Where(u => u.Email == email).FirstOrDefault();
+                BookModel book = context.Books.Where(b => b.Id == id).FirstOrDefault();
 
-            string email = this.User.Identity.Name;
-            UserModel user = context.Users.Where(u => u.Email == email).FirstOrDefault();
-            BookModel book = context.Books.Where(b => b.Id == id).FirstOrDefault();
+                foreach (var b in user.Books)
+                    if (b == book)
+                        return RedirectToAction("_ViewStart", "MainPage");
 
-            user.Books.Add(book);
+                user.Books.Add(book);
 
-            context.Users.Update(user);
-            context.SaveChanges();
+                context.Users.Update(user);
+                context.SaveChanges();
+            }
+            catch
+            {
+                return RedirectToAction("AllBooks", "Home");
+            }
 
             return RedirectToAction("AllBooks", "Home");
         }
         
+        [Authorize]
+        [HttpGet]
+        public IActionResult MyBook()
+        {
+            try
+            {
+                string email = this.User.Identity.Name;
+                UserModel user = context.Users.Where(u => u.Email == email).FirstOrDefault();
+                return View(user.Books.ToList());
+            }
+            catch
+            {
+                return RedirectToAction("AllBooks", "Home");
+            }
+        }
     }
 }
