@@ -5,12 +5,12 @@
     Layout = "~/Pages/_LayoutAdmin.cshtml";
 }
 
-<h1>AllAuthor</h1>
+<h1>Автори</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
-    @Html.ActionLink("NewAuthor", "NewAuthor", "Author")
+    @Html.ActionLink("Новий автор", "NewAuthor", "Author")
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -18,10 +18,10 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                Прізвище
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                Ім'я
             </th>
             <th></th>
         </tr>
@@ -40,8 +40,8 @@
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
                 <td>
-                    <a href="~/Author/EditAuthor/@item.Id">Edit</a>
-                    <a href="~/Author/DeleteAuthor/@item.Id">Delete</a>
+                    <a href="~/Author/EditAuthor/@item.Id">Редагувати</a>
+                    <a href="~/Author/DeleteAuthor/@item.Id">Видалити</a>
                 </td>
             </tr>
         }

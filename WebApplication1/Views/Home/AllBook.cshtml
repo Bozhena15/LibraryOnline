@@ -5,63 +5,65 @@
     Layout = "~/Pages/_LayoutAdmin.cshtml";
 }
 
-<h1>AllBook</h1>
+<h1>Книги</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
-    @Html.ActionLink("New Book", "NewBook","Book")
+    @Html.ActionLink("Нова книга", "NewBook", "Book")
 </p>
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Ім'я книги
             </th>
             <th>
-                Name
+                Ім'я автора
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GenreBook.Genre)
+                Жанр
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.YearOfPublic)
+                Рік публікації
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Link)
+                Силка
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Опис
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.LastName) @Html.DisplayFor(modelItem => item.Author.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GenreBook.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearOfPublic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Link)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.LastName) @Html.DisplayFor(modelItem => item.Author.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GenreBook.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearOfPublic)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Link)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
 
-            <td>
-                <a asp-action="EditBook" asp-controller="Book" asp-route-id="@item.Id">Edit</a> 
-                <a asp-action="DeleteBook" asp-controller="Book" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+                <td>
+                    <a asp-action="EditBook" asp-controller="Book" asp-route-id="@item.Id">Редагувати</a>
+                    <a asp-action="DeleteBook" asp-controller="Book" asp-route-id="@item.Id">Видалити</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -4,25 +4,25 @@
     Layout = "~/Pages/_Layout.cshtml";
 }
 
-<h1>All Books</h1>
+<h1>Книги</h1>
 
 <table class="table">
     <thead class="thead-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Ім'я книги
             </th>
             <th>
-                Name
+                Ім'я автора
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GenreBook.Genre)
+                Жанр
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.YearOfPublic)
+                Рік публікації
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Опис
             </th>
             <th></th>
         </tr>
@@ -47,11 +47,15 @@
             </td>
 
             <td>
-                <a asp-controller="Book" asp-action="AddUserBook" asp-route-id="@item.Id">Add</a>
+                <a asp-controller="Book" asp-action="AddUserBook" asp-route-id="@item.Id">Додати до улюблених</a>
             </td>
-            <td>
-                <a href="@Html.DisplayFor(modelItem => item.Link)">Add</a>
-            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    <a href="@Html.DisplayFor(modelItem => item.Link)">Скачати</a>
+                </td>
+            }
+
         </tr>
 }
     </tbody>

@@ -5,12 +5,12 @@
     Layout = "~/Pages/_LayoutAdmin.cshtml";
 }
 
-<h1>AllGenre</h1>
+<h1>Створити жанр</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
-    @Html.ActionLink("NewGenre", "NewGenre", "Genre")
+    @Html.ActionLink("Новий жанр", "NewGenre", "Genre")
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -18,7 +18,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Genre)
+                Жанр
             </th>
             <th></th>
         </tr>
@@ -33,8 +33,8 @@
                 @Html.DisplayFor(modelItem => item.Genre)
             </td>
             <td>
-                <a href="~/Genre/EditGenre/@item.Id">Edit</a>
-                <a href="~/Genre/DeleteGenre/@item.Id">Delete</a>
+                <a href="~/Genre/EditGenre/@item.Id">Редагувати</a>
+                <a href="~/Genre/DeleteGenre/@item.Id">Видалити</a>
             </td>
         </tr>
 }
