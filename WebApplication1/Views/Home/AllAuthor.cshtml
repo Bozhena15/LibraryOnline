@@ -12,15 +12,15 @@
     @Html.ActionLink("NewAuthor", "NewAuthor", "Author")
 </p>
 <table class="table">
-    <thead>
+    <thead class="thead-dark">
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th></th>
@@ -30,7 +30,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td scope="row">>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
                 <td>

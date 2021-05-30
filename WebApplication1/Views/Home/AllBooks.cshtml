@@ -9,22 +9,22 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            <th scope="col">
                 Name
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.GenreBook.Genre)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.YearOfPublic)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Link)
             </th>
-            <th>
+            <th scope="col">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th></th>
@@ -51,10 +51,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-
+            @if (User.Identity.IsAuthenticated) { 
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Add</a>
             </td>
+            }
         </tr>
 }
     </tbody>
